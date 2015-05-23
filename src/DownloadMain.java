@@ -20,14 +20,14 @@ public class DownloadMain {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        openChooseDirectory();
-        Download download = new Download("https://vk.com/feed?section=updates", fileDir);
-        //download.downloadFile("http://zholdiyarov.zz.mu/img/avstr.gif", fileDir);
-
         ExecutorService pool = Executors.newFixedThreadPool(10);
 
+        openChooseDirectory(); // Specify directory
+        Download download = new Download("https://vk.com/feed?section=updates", fileDir,false);
+
+        /* 2 versions */
         pool.submit(download);
-        pool.submit(new  Download("http://zholdiyarov.zz.mu/img/avstr.gif", fileDir));
+        pool.submit(new  Download("http://zholdiyarov.zz.mu/img/avstr.gif", fileDir,false));
 
         pool.shutdown();
         pool.awaitTermination(Long.MAX_VALUE, TimeUnit.MILLISECONDS);
